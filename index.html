@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pearson SLA Tracker Component - Small</title>
+    <title>Pearson SLA Tracker Component - Small Fixed</title>
     <style>
         /* Pearson Brand Variables */
         :root {
@@ -25,11 +25,11 @@
             margin: 0;
         }
 
-        /* Card Container - UPDATED: Smaller width and padding */
+        /* Card Container */
         .sla-card {
             background: white;
-            width: 280px; /* Reduced width */
-            padding: 16px; /* Reduced padding */
+            width: 280px; 
+            padding: 16px; 
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border: 1px solid rgba(0,0,0,0.05);
@@ -40,43 +40,41 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px; /* Tighter spacing */
+            margin-bottom: 12px;
         }
 
-        /* UPDATED: Smaller icon box */
         .icon-box {
             background-color: rgba(81, 46, 171, 0.1);
             color: var(--p-purple);
-            width: 32px; /* Reduced */
-            height: 32px; /* Reduced */
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* UPDATED: Smaller badge text and padding */
         .status-badge {
             background-color: rgba(34, 199, 198, 0.15);
             color: #008a89;
-            padding: 3px 10px; /* Reduced */
+            padding: 3px 10px;
             border-radius: 20px;
-            font-size: 10px; /* Reduced font */
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* Typography UPDATES */
+        /* Typography */
         h3 {
             margin: 0 0 2px 0;
             color: var(--p-navy);
-            font-size: 13px; /* Reduced font */
+            font-size: 13px;
             font-weight: 700;
         }
 
         .metric-large {
-            font-size: 24px; /* Reduced font significantly */
+            font-size: 24px;
             font-weight: 800;
             color: var(--p-navy);
             margin: 0;
@@ -84,29 +82,27 @@
         }
 
         .metric-label {
-            font-size: 11px; /* Reduced font */
+            font-size: 11px;
             color: var(--p-grey-text);
-            margin-bottom: 12px; /* Tighter spacing */
+            margin-bottom: 12px;
             display: block;
         }
 
         /* Progress Bar Container */
         .progress-wrapper {
             position: relative;
-            margin-top: 16px; /* Adjusted for label space */
+            margin-top: 18px; /* Increased slightly to prevent label overlap with text above */
         }
 
-        /* UPDATED: Thinner track */
         .progress-track {
             background-color: var(--p-grey-light);
-            height: 8px; /* Reduced height */
+            height: 8px;
             border-radius: 4px;
             width: 100%;
             overflow: hidden;
             position: relative;
         }
 
-        /* The Animated Bar */
         .progress-fill {
             background-color: var(--p-teal);
             height: 100%;
@@ -126,26 +122,26 @@
             z-index: 2;
         }
 
-        /* UPDATED: Smaller label, closer to bar */
+        /* UPDATED: Label CSS */
         .sla-limit-label {
             position: absolute;
-            top: -14px; /* Moved closer */
-            transform: translateX(-50%);
-            font-size: 9px; /* Reduced font */
+            top: -14px; 
+            /* Removed 'transform: translateX(-50%)' to allow precise edge alignment */
+            font-size: 9px;
             font-weight: 700;
             color: var(--p-navy);
             white-space: nowrap;
         }
 
-        /* Footer / Context UPDATES */
+        /* Footer */
         .card-footer {
-            margin-top: 16px; /* Tighter spacing */
-            padding-top: 12px; /* Tighter spacing */
+            margin-top: 16px; 
+            padding-top: 12px;
             border-top: 1px solid #eee;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 11px; /* Reduced font */
+            font-size: 11px;
             color: var(--p-grey-text);
         }
 
@@ -154,7 +150,6 @@
             font-weight: bold;
         }
 
-        /* Animation */
         @keyframes fillBar {
             from { width: 0%; }
             to { width: 60%; } 
@@ -178,7 +173,8 @@
         </div>
 
         <div class="progress-wrapper">
-            <div class="sla-limit-label" style="left: 100%;">SLA Goal: 5 Days</div>
+            <div class="sla-limit-label" style="right: 0;">SLA Goal: 5 Days</div>
+            
             <div class="sla-limit-marker" style="left: 100%;"></div> 
 
             <div class="progress-track">
@@ -191,5 +187,6 @@
             <span>faster than last month</span>
         </div>
     </div>
-    </body>
+
+</body>
 </html>
