@@ -2,164 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pearson SLA Tracker - Widget Safe</title>
+    <title>Pearson SLA Tracker - Inline Safe</title>
     <style>
-        /* Pearson Brand Variables */
-        :root {
-            --p-navy: #0d004c;
-            --p-purple: #512eab;
-            --p-yellow: #ffce04;
-            --p-teal: #22c7c6;
-            --p-grey-light: #f4f5f7;
-            --p-grey-text: #505050;
-        }
-
-        /* UPDATED: Reset body for widget embedding */
+        /* Base typography (Keep this for text, but layout is now inline-safe) */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: transparent; /* Transparent so it blends with widget bg */
+            background-color: transparent;
             margin: 0;
             padding: 0;
-            /* Removed flex/height centering to prevent layout collapse */
         }
-
-        /* Card Container */
+        
+        /* Card Shell */
         .sla-card {
             background: white;
-            /* UPDATED: Fluid width to fit the widget container */
-            width: 100%; 
-            max-width: 320px; /* Optional cap so it doesn't get too wide on large screens */
-            box-sizing: border-box; /* Ensures padding doesn't break width */
-            padding: 16px; 
+            width: 100%;
+            max-width: 300px; /* Cap width for aesthetics */
+            padding: 16px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
 
-        /* Header Section */
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .icon-box {
-            background-color: rgba(81, 46, 171, 0.1);
-            color: var(--p-purple);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .status-badge {
-            background-color: rgba(34, 199, 198, 0.15);
-            color: #008a89;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Typography */
-        h3 {
-            margin: 0 0 2px 0;
-            color: var(--p-navy);
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .metric-large {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--p-navy);
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .metric-label {
-            font-size: 11px;
-            color: var(--p-grey-text);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        /* Progress Bar Container */
-        .progress-wrapper {
-            position: relative;
-            margin-top: 18px; 
-            width: 100%; /* Ensure container fills width */
-        }
-
-        .progress-track {
-            background-color: var(--p-grey-light);
-            height: 8px;
-            border-radius: 4px;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            background-color: var(--p-teal);
-            height: 100%;
-            border-radius: 4px;
-            /* UPDATED: Removed animation to ensure visibility in widgets */
-            width: 60%; 
-        }
-
-        /* The "Target" Line */
-        .sla-limit-marker {
-            position: absolute;
-            top: -2px;
-            bottom: -2px;
-            width: 2px;
-            background-color: var(--p-navy);
-            z-index: 2;
-        }
-
-        /* Label CSS */
-        .sla-limit-label {
-            position: absolute;
-            top: -14px; 
-            font-size: 9px;
-            font-weight: 700;
-            color: var(--p-navy);
-            white-space: nowrap;
-        }
-
+        /* Typography Helpers */
+        h3 { margin: 0 0 2px 0; color: #0d004c; font-size: 13px; font-weight: 700; }
+        .metric-large { font-size: 24px; font-weight: 800; color: #0d004c; margin: 0; line-height: 1.2; }
+        .metric-label { font-size: 11px; color: #505050; margin-bottom: 12px; display: block; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        
         /* Footer */
-        .card-footer {
-            margin-top: 16px; 
-            padding-top: 12px;
-            border-top: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: var(--p-grey-text);
-        }
-
-        .trend-icon {
-            color: var(--p-teal);
-            font-weight: bold;
-        }
+        .card-footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid #eee; display: flex; align-items: center; gap: 6px; font-size: 11px; color: #505050; }
     </style>
 </head>
 <body>
 
     <div class="sla-card">
         <div class="card-header">
-            <div class="icon-box">
+            <div style="background-color: rgba(81, 46, 171, 0.1); color: #512eab; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 13l-7.5 7.5c-.8.8-2.1.8-2.9 0-.8-.8-.8-2.1 0-2.9L11 10"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>
             </div>
-            <span class="status-badge">On Track</span>
+            <span style="background-color: rgba(34, 199, 198, 0.15); color: #008a89; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">On Track</span>
         </div>
 
         <div>
@@ -168,18 +50,23 @@
             <span class="metric-label">Average turnaround time</span>
         </div>
 
-        <div class="progress-wrapper">
-            <div class="sla-limit-label" style="right: 0;">SLA Goal: 5 Days</div>
+        <div style="position: relative; margin-top: 18px; width: 100%;">
             
-            <div class="sla-limit-marker" style="left: 100%;"></div> 
+            <div style="position: absolute; top: -14px; right: 0; font-size: 9px; font-weight: 700; color: #0d004c; white-space: nowrap;">
+                SLA Goal: 5 Days
+            </div>
+            
+            <div style="position: absolute; top: -2px; bottom: -2px; width: 2px; background-color: #0d004c; left: 100%; z-index: 2;"></div> 
 
-            <div class="progress-track">
-                <div class="progress-fill"></div>
+            <div style="background-color: #f4f5f7; height: 8px; min-height: 8px; width: 100%; border-radius: 4px; overflow: hidden; position: relative;">
+                
+                <div style="background-color: #22c7c6; height: 100% !important; width: 60% !important; display: block !important; border-radius: 4px;"></div>
+            
             </div>
         </div>
 
         <div class="card-footer">
-            <span class="trend-icon">▼ 12%</span> 
+            <span style="color: #22c7c6; font-weight: bold;">▼ 12%</span> 
             <span>faster than last month</span>
         </div>
     </div>
