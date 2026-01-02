@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pearson SLA Tracker Component - Small Fixed</title>
+    <title>Pearson SLA Tracker - Widget Safe</title>
     <style>
         /* Pearson Brand Variables */
         :root {
@@ -15,20 +15,22 @@
             --p-grey-text: #505050;
         }
 
+        /* UPDATED: Reset body for widget embedding */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: transparent; /* Transparent so it blends with widget bg */
             margin: 0;
+            padding: 0;
+            /* Removed flex/height centering to prevent layout collapse */
         }
 
         /* Card Container */
         .sla-card {
             background: white;
-            width: 280px; 
+            /* UPDATED: Fluid width to fit the widget container */
+            width: 100%; 
+            max-width: 320px; /* Optional cap so it doesn't get too wide on large screens */
+            box-sizing: border-box; /* Ensures padding doesn't break width */
             padding: 16px; 
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -91,7 +93,8 @@
         /* Progress Bar Container */
         .progress-wrapper {
             position: relative;
-            margin-top: 18px; /* Increased slightly to prevent label overlap with text above */
+            margin-top: 18px; 
+            width: 100%; /* Ensure container fills width */
         }
 
         .progress-track {
@@ -106,10 +109,9 @@
         .progress-fill {
             background-color: var(--p-teal);
             height: 100%;
-            width: 0%;
             border-radius: 4px;
-            animation: fillBar 1.5s ease-out forwards;
-            position: relative;
+            /* UPDATED: Removed animation to ensure visibility in widgets */
+            width: 60%; 
         }
 
         /* The "Target" Line */
@@ -122,11 +124,10 @@
             z-index: 2;
         }
 
-        /* UPDATED: Label CSS */
+        /* Label CSS */
         .sla-limit-label {
             position: absolute;
             top: -14px; 
-            /* Removed 'transform: translateX(-50%)' to allow precise edge alignment */
             font-size: 9px;
             font-weight: 700;
             color: var(--p-navy);
@@ -148,11 +149,6 @@
         .trend-icon {
             color: var(--p-teal);
             font-weight: bold;
-        }
-
-        @keyframes fillBar {
-            from { width: 0%; }
-            to { width: 60%; } 
         }
     </style>
 </head>
@@ -178,7 +174,7 @@
             <div class="sla-limit-marker" style="left: 100%;"></div> 
 
             <div class="progress-track">
-                <div class="progress-fill" style="width: 60%;"></div>
+                <div class="progress-fill"></div>
             </div>
         </div>
 
